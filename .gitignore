@@ -1,0 +1,12 @@
+env/*
+functionlib/__pycache__/clipboard.cpython-311.pyc
+functionlib/__pycache__/music.cpython-311.pyc
+functionlib/__pycache__/screenFunctions.cpython-311.pyc
+functionlib/__pycache__/speech.cpython-311.pyc
+functionlib/__pycache__/vision.cpython-311.pyc
+functionlib/__pycache__/webcam.cpython-311.pyc
+lib/__pycache__/playsound.cpython-311.pyc
+prompt.wav
+.env
+webcam.jpg
+screenshot.jpg
