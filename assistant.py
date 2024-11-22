@@ -14,10 +14,14 @@ import speech_recognition as sr
 from lib.playsound import playsound
 from functionlib.music import playMusicUsingBrowser
 import threading
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 source = sr.Microphone()
 
 start_time = None
+visual_context = None
 wake_detected = False
 
 r = sr.Recognizer()
@@ -42,7 +46,7 @@ def start_listening():
                 break
 
 
-groq_client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 # def callback(recognizer, audio):
 #     global start_time
@@ -102,7 +106,7 @@ def playMusicPrompt(prompt):
         "based on the user's prompt, which may describe a mood, activity, or specific preferences. "
         "If the prompt is related to mood, activity or genre respond with a short subject (e.g., 'Jazz', 'Morning routine', 'Walk in park', 'music for study', 'Sad mood'). "
         "If the prompt suggests a specific preference or known artist, respond with only the artist's name. "
-        "Do not include punctuation, explanations, or additional text. Keep your response concise and to the point."
+        "Do not include punctuation, explanations, or additional text. Keep your response concise and to the point. Response language is always Russian"
     )
 
     function_convo = [
@@ -206,7 +210,7 @@ def construct_success_response(task_name, task_argument):
     return response.content.strip()
 
 def callback(recognizer, audio):
-    global wake_detected, start_time
+    global wake_detected, start_time, visual_context
     prompt_audio_path = 'prompt.wav'
     with open(prompt_audio_path, 'wb') as f:
         f.write(audio.get_wav_data())

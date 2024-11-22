@@ -1,8 +1,11 @@
 from openai import OpenAI
 import pyaudio
 import os
+from dotenv import load_dotenv
 
-openai_client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+# Load environment variables from .env file
+load_dotenv()
+openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 def speak(text):
     # speak(text)
